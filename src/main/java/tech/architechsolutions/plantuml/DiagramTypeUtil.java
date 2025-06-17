@@ -1,6 +1,6 @@
-package com.nitor.plantuml;
+package tech.architechsolutions.plantuml;
 
-import com.nitor.plantuml.lambda.DiagramType;
+import tech.architechsolutions.plantuml.lambda.DiagramType;
 import net.sourceforge.plantuml.FileFormat;
 import org.apache.log4j.Logger;
 

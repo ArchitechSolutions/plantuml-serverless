@@ -1,4 +1,4 @@
-package com.nitor.plantuml.lambda;
+package tech.architechsolutions.plantuml.lambda;
 
 import java.util.List;
 

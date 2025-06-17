@@ -1,10 +1,10 @@
-package com.nitor.plantuml;
+package tech.architechsolutions.plantuml;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nitor.plantuml.lambda.DiagramType;
-import com.nitor.plantuml.lambda.SyntaxCheckResult;
-import com.nitor.plantuml.lambda.exception.BadRequestException;
+import tech.architechsolutions.plantuml.lambda.DiagramType;
+import tech.architechsolutions.plantuml.lambda.SyntaxCheckResult;
+import tech.architechsolutions.plantuml.lambda.exception.BadRequestException;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.LineLocation;

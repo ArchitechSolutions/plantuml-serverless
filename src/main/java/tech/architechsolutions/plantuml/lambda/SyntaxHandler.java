@@ -1,11 +1,11 @@
-package com.nitor.plantuml.lambda;
+package tech.architechsolutions.plantuml.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nitor.plantuml.PlantUmlUtil;
-import com.nitor.plantuml.lambda.exception.StatusCodeException;
+import tech.architechsolutions.plantuml.PlantUmlUtil;
+import tech.architechsolutions.plantuml.lambda.exception.StatusCodeException;
 import org.apache.http.HttpStatus;
 import org.json.simple.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.nitor.plantuml.lambda;
+package tech.architechsolutions.plantuml.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;

@@ -1,4 +1,4 @@
-package com.nitor.plantuml.lambda.exception;
+package tech.architechsolutions.plantuml.lambda.exception;
 
 public class BadRequestException extends StatusCodeException {
 

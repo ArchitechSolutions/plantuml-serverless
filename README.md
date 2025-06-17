@@ -1,6 +1,15 @@
 # Render PlantUML diagrams with AWS Lambda
 
-A serverless UI + API to render [PlantUML](http://plantuml.com) diagrams.
+A serverless UI + API to render [PlantUML](http://plantuml.com) diagrams using a single Lambda function.
+
+## Features
+
+- Single Lambda function architecture for better performance and cost efficiency
+- Drop-in replacement for the official PlantUML server
+- Supports PNG, SVG, and TXT rendering
+- Enhanced logging system with request tracking
+- CORS support for cross-origin requests
+- Custom domain support (optional)
 
 ## Drop in replacement for official PlantUML server
 
@@ -18,6 +27,17 @@ For example, to have Visual Studio Code PlantUML plugin render using your own se
 
 Use `"plantuml.server": "https://plantuml.nitorio.us"` if you'd like to try before you deploy your own.
 
+## API Endpoints
+
+The single Lambda function handles all requests through different paths:
+
+- `/` - UI interface
+- `/png/{encoded}` - PNG diagram rendering
+- `/svg/{encoded}` - SVG diagram rendering
+- `/txt/{encoded}` - Text diagram rendering
+- `/map/{encoded}` - Map diagram rendering
+- `/check` - Syntax checking
+
 ## Demo
 
 ### PNG Diagram
@@ -34,29 +54,66 @@ https://plantuml.nitorio.us/txt/Kt8goYylJYrIKj2rKr1o3F1KS4yiIIrFh5IoKWZ8ALOeIirB
 
 ## Build
 
-- `npm ci`
-- `mvn clean package`
+```bash
+# Install dependencies
+npm ci
+
+# Build the project
+mvn clean package
+```
 
 ## Deploy
 
 You can deploy with Serverless framework or AWS SAM.
 
-This used to be available on the AWS Serverless Application Repository, but currently that's not possible because it
-doesn't appear to support lambda functions packaged as container images.
-
 ### Serverless framework:
 
-- Edit `serverless.yml` to replace `custom.domains.dev` and `custom.domains.prod` with your own domain names.
-    * If you don't want a custom domain name, remove or comment out the `serverless-domain-manager` plugin from the plugins list and skip
-      the `sls create-cert` and `sls create_domain` commands.
-- Run `sls create-cert` to create an ACM certificate for your domain as configured in `custom.customCertificate`.
-- Run `sls create_domain` to create an API Gateway custom domain as configured in `custom.customDomain`.
-- Run `sls deploy`.
+1. Edit `serverless.yml` to replace `custom.domains.dev` and `custom.domains.prod` with your own domain names.
+   - If you don't want a custom domain name, remove or comment out the `serverless-domain-manager` plugin from the plugins list and skip the `sls create-cert` and `sls create_domain` commands.
+
+2. Create ACM certificate:
+```bash
+sls create-cert
+```
+
+3. Create API Gateway custom domain:
+```bash
+sls create_domain
+```
+
+4. Deploy:
+```bash
+sls deploy
+```
 
 The above steps deploy the default `dev` stage. To deploy the `prod` stage, add `--stage prod` to each command.
 
 ### AWS SAM
 
-- Run `sam-deploy.sh`
+1. Create an ECR repository:
+```bash
+aws ecr create-repository --repository-name plantuml-sam \
+--image-tag-mutability IMMUTABLE --image-scanning-configuration scanOnPush=true
+```
+
+2. Deploy using the provided script:
+```bash
+./sam-deploy.sh -b <your-s3-bucket>
+```
 
 The SAM deployment doesn't include custom domains currently.
+
+## Request Tracking
+
+The API supports request tracking through query parameters:
+- `currentRequestNumber`: Current request number
+- `callingRequestNumber`: Calling request number
+
+Example:
+```
+https://your-endpoint/png/encoded-diagram?currentRequestNumber=1&callingRequestNumber=2
+```
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!

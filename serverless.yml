@@ -5,7 +5,7 @@ variablesResolutionMode: 20210326
 
 provider:
   name: aws
-  region: eu-west-1
+  region: us-east-1
   stage: dev
   timeout: 30
   logRetentionInDays: 30
@@ -44,100 +44,28 @@ custom:
     endpointType: edge
 
 functions:
-  ui:
+  plantuml:
     events:
       - http:
           path: /
-          method: get
+          method: post
           integration: lambda-proxy
           cors: true
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.UIHandler::handleRequest
-  uml:
-    events:
+          request:
+            template:
+              application/json: '{ "body": $input.json("$") }'
       - http:
-          path: uml/{encodedUml}
-          method: get
+          path: /{proxy+}
+          method: post
           integration: lambda-proxy
           cors: true
+          request:
+            template:
+              application/json: '{ "body": $input.json("$") }'
     image:
       name: lambdacontainer
       command:
-        - com.nitor.plantuml.lambda.UmlHandler::handleRequest
-  png:
-    events:
-      - http:
-          path: png/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-          response:
-            contentHandling: CONVERT_TO_BINARY
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.PngHandler::handleRequest
-  img:
-    events:
-      - http:
-          path: img/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-          response:
-            contentHandling: CONVERT_TO_BINARY
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.PngHandler::handleRequest
-  svg:
-    events:
-      - http:
-          path: svg/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.SvgHandler::handleRequest
-  txt:
-    events:
-      - http:
-          path: txt/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.TxtHandler::handleRequest
-  map:
-    events:
-      - http:
-          path: map/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-          response:
-            contentHandling: CONVERT_TO_BINARY
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.MapHandler::handleRequest
-  check:
-    events:
-      - http:
-          path: check/{encodedUml}
-          method: get
-          integration: lambda-proxy
-          cors: true
-    image:
-      name: lambdacontainer
-      command:
-        - com.nitor.plantuml.lambda.SyntaxHandler::handleRequest
+        - tech.architechsolutions.plantuml.lambda.MainHandler::handleRequest
 
 resources:
   Description: PlantUML Serverless

@@ -1,0 +1,9 @@
+version = 0.1
+
+[default.deploy]
+stack_name = "plantuml-sam-dev"
+region = "us-east-1"
+s3_bucket = "plantuml-artifacts-dev"
+image_repositories = ["PlantUMLFunction=626635402073.dkr.ecr.us-east-1.amazonaws.com/plantuml-sam"]
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Env=dev"

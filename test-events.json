@@ -1,0 +1,120 @@
+{
+  "valid-plantuml": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "png"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "valid-plantuml-with-etag": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "png"
+    },
+    "headers": {
+      "Content-Type": "application/json",
+      "if-none-match": "png1.2023.12-1234567890abcdef"
+    }
+  },
+  "invalid-plantuml": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "syntax"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "map-request": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "map"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "svg-request": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "svg"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "txt-request": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "txt"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "uml-request": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "uml"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "ui-request": {
+    "body": {
+      "plantUmlCode": "@startuml\nAlice -> Bob: Hello\nBob --> Alice: Hi there!\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "ui"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "missing-plantuml-code": {
+    "body": {
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "png"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "invalid-json": {
+    "body": {
+      "invalid": "json"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "complex-diagram": {
+    "body": {
+      "plantUmlCode": "@startuml\n!theme plain\nskinparam backgroundColor white\nskinparam handwritten false\n\nactor User\nparticipant \"Frontend\" as FE\nparticipant \"API Gateway\" as API\nparticipant \"Lambda\" as LAMBDA\nparticipant \"PlantUML\" as PUML\n\nUser -> FE: Submit PlantUML code\nFE -> API: POST /plantuml\nAPI -> LAMBDA: Invoke Lambda\nLAMBDA -> PUML: Process diagram\nPUML --> LAMBDA: Return result\nLAMBDA --> API: Return response\nAPI --> FE: Return response\nFE --> User: Display result\n@enduml",
+      "rootRequestNumber": "123",
+      "callingRequestNumber": "456",
+      "responseType": "png"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+} 

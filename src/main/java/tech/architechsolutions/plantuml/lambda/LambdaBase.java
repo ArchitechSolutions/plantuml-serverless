@@ -1,7 +1,7 @@
-package com.nitor.plantuml.lambda;
+package tech.architechsolutions.plantuml.lambda;
 
-import com.nitor.plantuml.PlantUmlUtil;
-import com.nitor.plantuml.lambda.exception.StatusCodeException;
+import tech.architechsolutions.plantuml.PlantUmlUtil;
+import tech.architechsolutions.plantuml.lambda.exception.StatusCodeException;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 
-import static com.nitor.plantuml.PlantUmlUtil.NOETAG;
+import static tech.architechsolutions.plantuml.PlantUmlUtil.NOETAG;
 
 class LambdaBase {
 
